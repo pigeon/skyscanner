@@ -1,0 +1,10 @@
+Itineraries[OutboundLegId].OriginStation
+Itineraries[InboundLegId].DestinationStation
+Itineraries[OutboundLegId].Departure
+Itineraries[InboundLegId].Arrival
+Itineraries[InboundLegId].Duration
+Itineraries[InboundLegId].Stops - []
+Itineraries[InboundLegId].Carriers - []
+
+
+Itineraries[price]
