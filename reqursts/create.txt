@@ -1,0 +1,12 @@
+curl -X POST \
+  http://partners.api.skyscanner.net/apiservices/pricing/v1.0 \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -H 'postman-token: 3590a7f9-dc6c-fed8-ff1b-c77d78cd1f35' \
+  -d 'cabinclass=Economy&country=UK&currency=GBP&locale=en-GB&locationSchema=sky&originplace=EDI-sky&destinationplace=LOND-sky%20&outbounddate=2018-06-10&inbounddate=2018-06-11&adults=1&children=0&infants=0&apikey=ss630745725358065467897349852985'
+
+
+  header 
+
+
+  
