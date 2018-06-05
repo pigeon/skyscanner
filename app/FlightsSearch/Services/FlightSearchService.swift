@@ -19,7 +19,7 @@ class FlightSearchServiceImpl : FlightSearchService {
     
     private let session = URLSession(configuration: URLSessionConfiguration.default)
     internal let apiKey:String
-    
+    private let requestBody = []
     
     init(key:String = "ss630745725358065467897349852985") {
 
@@ -52,7 +52,20 @@ class FlightSearchServiceImpl : FlightSearchService {
         task.resume()
     }
     
-    func createSession() {
+    func createRequestBody() -> [AnyHashable:String] {
+        let body = [
+
+        ]
+    }
+    
+    func createSession(from:String, to:String) {
+        let strURL = "http://partners.api.skyscanner.net/apiservices/pricing/v1.0"
+        
+        let url = URL(string: strURL)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        
+        
         
     }
     
