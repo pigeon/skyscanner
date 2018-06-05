@@ -73,6 +73,9 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     func getMovies() {
+        flightSearchService.findFlights(from: "LOND", to: "EDI") { object,error in
+            print(object)
+        }
 //        flightSearchService.movies(page: currentPage + 1) { [weak self] res,error  in
 //            if let res = res,
 //                let results = res.results {

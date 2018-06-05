@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias AuthorisationCompletion = (NSError?)->Void
+typealias AuthorisationCompletion = (String?,NSError?)->Void
 typealias FlightsSearchCompletion =  (FlightSearchResults?,NSError?) -> Void
 
 
@@ -31,7 +31,7 @@ class AuthorisationAction : CompletionAction {
     }
     
     func run() {
-        handler(err)
+        handler(nil,err)
     }
 }
 
