@@ -16,7 +16,7 @@ protocol FlightsSearchViewOutput {
 
     func viewIsReady()
     func numberOfItemsInSection() -> Int
-    func dataModel(with index:IndexPath) -> Movie
+//    func dataModel(with index:IndexPath) -> Movie
     func movieSelected(at index:IndexPath)
     func prepare(for segue: UIStoryboardSegue)
     func title() -> String

@@ -97,7 +97,7 @@ extension FlightsSearchViewController : UICollectionViewDelegate, UICollectionVi
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchImage", for: indexPath)
         if let cell = cell as? FlightsSearchCell {
-            cell.configure(output.dataModel(with: indexPath))
+            //cell.configure(output.dataModel(with: indexPath))
         }
         
         return cell

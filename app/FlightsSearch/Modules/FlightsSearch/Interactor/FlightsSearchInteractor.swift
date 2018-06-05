@@ -9,37 +9,28 @@
 import Foundation
 import UIKit
 
-let greenColour = UIColor(red: 0, green: 0.6588, blue: 0.251, alpha: 1.0)
 
-struct Movie {
-    let imageURL:String
-    let movieTitle:String
-    let movieDescription:String
-    let rating:NSAttributedString
-    let releaseDate:String
-    
-    init?(url: String?, title: String?, overview: String?, vote: NSAttributedString?, date: String?) {
-        if let url = url,
-            let title = title,
-            let overview = overview,
-            let vote = vote,
-            let date = date {
-            imageURL = url
-            movieTitle = title
-            movieDescription = overview
-            rating = vote
-            releaseDate = date
-        } else {
-            return nil
-        }
-    }
-    
+struct FlightDetais {
+    let carrierLogoURL:String
+    let departureTime:Date
+    let arrivalTime:Date
+    let carrier:String
+    let originStation:String
+    let destinationStation:String
+    let flightTime:String
+}
+
+struct FlightSearchResult {
+    let outbountFlight:FlightDetais
+    let inboundFlight:FlightDetais
+    let rating:Double
+    let price:Double
 }
 
 class FlightsSearchInteractor: FlightsSearchInteractorInput {
 
     weak var output: FlightsSearchInteractorOutput!
-    let movieDBAPI:MoviesService
+    let flightSearchService:FlightSearchService
     
     var numberOfPages = 0
     var currentPage = 0
@@ -56,8 +47,8 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return dateFormatter
     }()
     
-    init(service:MoviesService = MoviesServiceImpl()) {
-        movieDBAPI = service
+    init(service:FlightSearchService = FlightSearchServiceImpl()) {
+        flightSearchService = service
     }
     
     func formatDate(_ date:String?) -> String? {
@@ -72,27 +63,7 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return date
     }
     
-    func colour(for vote:Double) -> UIColor {
-        if vote >= 7.0 {
-            return greenColour
-        } else if vote >= 4.0 {
-            return UIColor.orange
-        }
-        return UIColor.red
-    }
     
-    func vote(for rating:Double) -> String {
-        // I assume here that the max vote on TMDB is 10. I haven't found this information in API describtion
-        return String(format: "%.0f%%", (rating / 10.0) * 100.0)
-    }
-    
-    func formatVotes(rating:Double?) -> NSAttributedString? {
-        guard let rating = rating else {
-            return nil
-        }
-        let stringColor = [ NSAttributedStringKey.foregroundColor: self.colour(for: rating)]
-        return NSAttributedString(string: self.vote(for: rating), attributes: stringColor)
-    }
     
     func movieImageURL(id:String?) -> String? {
         guard let id = id else {
@@ -102,29 +73,29 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     func getMovies() {
-        movieDBAPI.movies(page: currentPage + 1) { [weak self] res,error  in
-            if let res = res,
-                let results = res.results {
-                self?.currentPage = res.page!
-                self?.numberOfPages = res.total_pages!
-                var resultedMovies:[Movie] = []
-                results.forEach {
-                    let movie = Movie(url: self?.movieImageURL(id:$0.poster_path),
-                                      title: $0.title,
-                                      overview: $0.overview,
-                                      vote: self?.formatVotes(rating:$0.vote_average),
-                                      date: self?.formatDate($0.release_date))
-                    if let movie = movie {
-                        resultedMovies.append(movie)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self?.output.movies( resultedMovies )
-                }
-            } else {
-                self?.output.error(error!)
-            }
-        }
+//        flightSearchService.movies(page: currentPage + 1) { [weak self] res,error  in
+//            if let res = res,
+//                let results = res.results {
+//                self?.currentPage = res.page!
+//                self?.numberOfPages = res.total_pages!
+//                var resultedMovies:[Movie] = []
+//                results.forEach {
+//                    let movie = Movie(url: self?.movieImageURL(id:$0.poster_path),
+//                                      title: $0.title,
+//                                      overview: $0.overview,
+//                                      vote: self?.formatVotes(rating:$0.vote_average),
+//                                      date: self?.formatDate($0.release_date))
+//                    if let movie = movie {
+//                        resultedMovies.append(movie)
+//                    }
+//                }
+//                DispatchQueue.main.async {
+//                    self?.output.movies( resultedMovies )
+//                }
+//            } else {
+//                self?.output.error(error!)
+//            }
+//        }
     }
     
 }

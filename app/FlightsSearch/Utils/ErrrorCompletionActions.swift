@@ -9,7 +9,7 @@
 import Foundation
 
 typealias AuthorisationCompletion = (NSError?)->Void
-typealias MoviesListCompletion =  (Movies?,NSError?) -> Void
+typealias FlightsSearchCompletion =  (FlightSearchResults?,NSError?) -> Void
 
 
 protocol CompletionAction {
@@ -38,9 +38,9 @@ class AuthorisationAction : CompletionAction {
 class SearchAction : CompletionAction {
     
     var err:NSError?
-    let handler:MoviesListCompletion
+    let handler:FlightsSearchCompletion
     
-    init(completion:@escaping MoviesListCompletion) {
+    init(completion:@escaping FlightsSearchCompletion) {
         handler = completion
     }
     

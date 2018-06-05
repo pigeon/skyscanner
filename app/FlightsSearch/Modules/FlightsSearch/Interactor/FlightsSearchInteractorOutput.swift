@@ -9,6 +9,6 @@
 import Foundation
 
 protocol FlightsSearchInteractorOutput: class {
-    func movies(_:[Movie])
+    //func movies(_:[Movie])
     func error(_:NSError)
 }

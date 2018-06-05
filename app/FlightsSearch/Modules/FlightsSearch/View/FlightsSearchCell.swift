@@ -10,18 +10,16 @@ import UIKit
 
 
 class FlightsSearchCell: UICollectionViewCell {
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var moviesDescription: UILabel!
-    @IBOutlet weak var releaseDate: UILabel!
-    @IBOutlet weak var rating: UILabel!
+
+    @IBOutlet weak var stackView: UIStackView!
+
     
-    func configure(_ model:Movie) {
+    func configure(_ model:FlightSearchResult) {
         //self.image.kf.indicatorType = .activity
         //self.image.kf.setImage(with: URL(string: model.imageURL)!)
-        self.movieTitle.text = model.movieTitle
-        self.moviesDescription.text = model.movieDescription
-        self.releaseDate.text = model.releaseDate
-        self.rating.attributedText = model.rating
+//        self.movieTitle.text = model.movieTitle
+//        self.moviesDescription.text = model.movieDescription
+//        self.releaseDate.text = model.releaseDate
+//        self.rating.attributedText = model.rating
     }
 }

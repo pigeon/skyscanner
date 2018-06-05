@@ -14,7 +14,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     var interactor: FlightsSearchInteractorInput!
     var selectedImageIndex:IndexPath?
     
-    var moviesList:[Movie] = [] {
+    var moviesList:[FlightSearchResult] = [] {
         didSet {
           view.reload()
         }
@@ -32,7 +32,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
         return moviesList.count
     }
     
-    func movies(_ movies: [Movie]) {
+    func movies(_ movies: [FlightSearchResult]) {
         if self.moviesList.isEmpty {
            self.moviesList = movies
         } else {
@@ -45,7 +45,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
         view.show(error: error)
     }
     
-    func dataModel(with index: IndexPath) -> Movie {
+    func dataModel(with index: IndexPath) -> FlightSearchResult {
         if index.row == (moviesList.count - 1) {
             interactor.getMovies()
         }
