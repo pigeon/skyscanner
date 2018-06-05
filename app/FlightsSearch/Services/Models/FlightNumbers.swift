@@ -13,7 +13,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 import Foundation
 struct FlightNumbers : Codable {
-	let flightNumber : Int?
+	let flightNumber : String?
 	let carrierId : Int?
 
 	enum CodingKeys: String, CodingKey {
@@ -24,7 +24,7 @@ struct FlightNumbers : Codable {
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		flightNumber = try values.decodeIfPresent(Int.self, forKey: .flightNumber)
+		flightNumber = try values.decodeIfPresent(String.self, forKey: .flightNumber)
 		carrierId = try values.decodeIfPresent(Int.self, forKey: .carrierId)
 	}
 

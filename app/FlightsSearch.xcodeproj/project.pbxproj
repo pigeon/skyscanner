@@ -23,6 +23,8 @@
 		1A01503C20C5BCA30059DE91 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A01502F20C5BCA20059DE91 /* Places.swift */; };
 		1A08FD0620756F05008BB65F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A08FD0520756F05008BB65F /* ViewController.swift */; };
 		1A1F529820C6996100E024E4 /* URLRequestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1F529720C6996100E024E4 /* URLRequestUtils.swift */; };
+		1A2E45C920C7315A00FF1779 /* FlightsSearchServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2E45C820C7315A00FF1779 /* FlightsSearchServiceMock.swift */; };
+		1A2E45CB20C7345300FF1779 /* results.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A2E45CA20C7345300FF1779 /* results.json */; };
 		1A49D8CC206C01FC0001FCD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49D8CB206C01FC0001FCD3 /* AppDelegate.swift */; };
 		1A49D8D1206C01FC0001FCD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8CF206C01FC0001FCD3 /* Main.storyboard */; };
 		1A49D8D3206C01FC0001FCD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8D2206C01FC0001FCD3 /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 		1A08FD0520756F05008BB65F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A08FD0820757A64008BB65F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1A1F529720C6996100E024E4 /* URLRequestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestUtils.swift; sourceTree = "<group>"; };
+		1A2E45C820C7315A00FF1779 /* FlightsSearchServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightsSearchServiceMock.swift; sourceTree = "<group>"; };
+		1A2E45CA20C7345300FF1779 /* results.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = results.json; sourceTree = "<group>"; };
 		1A49D8C8206C01FC0001FCD3 /* FlightsSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightsSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A49D8CB206C01FC0001FCD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A49D8D0206C01FC0001FCD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +133,15 @@
 			path = FlightsSearch;
 			sourceTree = "<group>";
 		};
+		1A2E45C720C7313200FF1779 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				1A2E45CA20C7345300FF1779 /* results.json */,
+				1A2E45C820C7315A00FF1779 /* FlightsSearchServiceMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		1A49D8BF206C01FC0001FCD3 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +189,7 @@
 		1A611F0C2070D9200043B084 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1A2E45C720C7313200FF1779 /* Mock */,
 				1A611F32207173190043B084 /* Models */,
 				1A611F0D2070D9420043B084 /* FlightSearchService.swift */,
 			);
@@ -396,6 +410,7 @@
 			files = (
 				1A49D8D6206C01FC0001FCD3 /* LaunchScreen.storyboard in Resources */,
 				1A49D8D3206C01FC0001FCD3 /* Assets.xcassets in Resources */,
+				1A2E45CB20C7345300FF1779 /* results.json in Resources */,
 				1A49D8D1206C01FC0001FCD3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +469,7 @@
 				1A08FD0620756F05008BB65F /* ViewController.swift in Sources */,
 				1A01503720C5BCA30059DE91 /* Segments.swift in Sources */,
 				1A611F0E2070D9420043B084 /* FlightSearchService.swift in Sources */,
+				1A2E45C920C7315A00FF1779 /* FlightsSearchServiceMock.swift in Sources */,
 				C452BF4E49A355C3771A5FF8 /* FlightsSearchInteractorOutput.swift in Sources */,
 				6FBDC878FBF9DAB47C05C15E /* FlightsSearchInteractor.swift in Sources */,
 				1A611F0B206D964A0043B084 /* FlightsSearchCell.swift in Sources */,

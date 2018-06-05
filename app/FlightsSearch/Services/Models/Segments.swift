@@ -21,7 +21,7 @@ struct Segments : Codable {
 	let carrier : Int?
 	let operatingCarrier : Int?
 	let duration : Int?
-	let flightNumber : Int?
+	let flightNumber : String?
 	let journeyMode : String?
 	let directionality : String?
 
@@ -50,7 +50,7 @@ struct Segments : Codable {
 		carrier = try values.decodeIfPresent(Int.self, forKey: .carrier)
 		operatingCarrier = try values.decodeIfPresent(Int.self, forKey: .operatingCarrier)
 		duration = try values.decodeIfPresent(Int.self, forKey: .duration)
-		flightNumber = try values.decodeIfPresent(Int.self, forKey: .flightNumber)
+		flightNumber = try values.decodeIfPresent(String.self, forKey: .flightNumber)
 		journeyMode = try values.decodeIfPresent(String.self, forKey: .journeyMode)
 		directionality = try values.decodeIfPresent(String.self, forKey: .directionality)
 	}

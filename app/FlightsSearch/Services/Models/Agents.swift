@@ -18,7 +18,7 @@ struct Agents : Codable {
 	let imageUrl : String?
 	let status : String?
 	let optimisedForMobile : Bool?
-	let bookingNumber : Int?
+	let bookingNumber : String?
 	let type : String?
 
 	enum CodingKeys: String, CodingKey {
@@ -39,7 +39,7 @@ struct Agents : Codable {
 		imageUrl = try values.decodeIfPresent(String.self, forKey: .imageUrl)
 		status = try values.decodeIfPresent(String.self, forKey: .status)
 		optimisedForMobile = try values.decodeIfPresent(Bool.self, forKey: .optimisedForMobile)
-		bookingNumber = try values.decodeIfPresent(Int.self, forKey: .bookingNumber)
+		bookingNumber = try values.decodeIfPresent(String.self, forKey: .bookingNumber)
 		type = try values.decodeIfPresent(String.self, forKey: .type)
 	}
 

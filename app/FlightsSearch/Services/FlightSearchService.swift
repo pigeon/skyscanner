@@ -30,30 +30,13 @@ class FlightSearchServiceImpl : FlightSearchService {
     
     func findFlights(from:String, to:String, completion:@escaping FlightsSearchCompletion) {
         
-        createSession(from: from, to: to) { url,error in
-            print( url ?? "" )
+        createSession(from: from, to: to) { [weak self] url,error in
+            guard let url = url else {
+                self?.service(error: error, completion: SearchAction(completion: completion))
+                return
+            }
+            self?.pollSearchResult(with: url, completion: completion)
         }
-        
-//        let strURL = "https://api.themoviedb.org/3/movie/popular?api_key=\(self.apiKey)&page=\(from)"
-//
-//        let url = URL(string: strURL)
-//        var request = URLRequest(url: url!)
-//        request.httpMethod = "GET"
-//        let task = session.dataTask(with: request) {  (data, response, error) in
-//
-//            if let data = data {
-//
-//                let jsonDecoder = JSONDecoder()
-//
-//                let responseModel = try! jsonDecoder.decode(FlightSearchResults.self, from: data)
-//
-//                completion(responseModel,nil)
-//            } else {
-//                self.service(error: error as NSError?, completion: SearchAction(completion: completion))
-//            }
-//        }
-//
-//        task.resume()
     }
 
     func createRequestBody() -> [String:String] {
@@ -89,23 +72,40 @@ class FlightSearchServiceImpl : FlightSearchService {
         let task = session.dataTask(with: request) {  (data, response, error) in
             
             if error == nil , let response = response as? HTTPURLResponse {
-                print(response.allHeaderFields)
+                if let pollURL = response.allHeaderFields["Location"] as? String {
+                    completion(pollURL, nil)
+                } else {
+                    self.service(error: error as NSError?, completion: AuthorisationAction(completion: completion))
+                }
             } else {
                 completion(nil,error! as NSError)
             }
-            
-//            if let data = data {
-//
-//                //let jsonDecoder = JSONDecoder()
-//                //let responseModel = try! jsonDecoder.decode(FlightSearchResults.self, from: data)
-//                //completion(responseModel,nil)
-//            } else {
-//                //self.service(error: error as NSError?, completion: SearchAction(completion: completion))
-//            }
         }
         
         task.resume()
         
+    }
+    
+    func pollSearchResult(with url:String,completion:@escaping FlightsSearchCompletion) {
+        let strURL = "\(url)?apikey=\(apiKey)&pageIndex=0&pageSize=3"
+        let url = URL(string: strURL)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        let task = session.dataTask(with: request) {  (data, response, error) in
+            
+            if let data = data,let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                
+                let jsonDecoder = JSONDecoder()
+                
+                let responseModel = try! jsonDecoder.decode(FlightSearchResults.self, from: data)
+                
+                completion(responseModel,nil)
+            } else {
+                self.service(error: error as NSError?, completion: SearchAction(completion: completion))
+            }
+        }
+        
+        task.resume()
     }
     
     func service(error:NSError?,completion:CompletionAction) {
