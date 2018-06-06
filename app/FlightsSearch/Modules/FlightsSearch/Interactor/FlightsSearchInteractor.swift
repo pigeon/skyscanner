@@ -12,15 +12,15 @@ import UIKit
 
 struct FlightDetais {
     let carrierLogoURL:String
-    let departureTime:Date
-    let arrivalTime:Date
+    let departureTime:String
+    let arrivalTime:String
     let carrier:String
     let originStation:String
     let destinationStation:String
     let flightTime:String
 }
 
-struct FlightSearchResult {
+struct BookingDetails {
     let outbountFlight:FlightDetais
     let inboundFlight:FlightDetais
     let rating:Double
@@ -64,7 +64,6 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     
-    
     func movieImageURL(id:String?) -> String? {
         guard let id = id else {
             return nil
@@ -72,33 +71,28 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return "http://image.tmdb.org/t/p/w500/\(id)"
     }
     
-    func getMovies() {
-        flightSearchService.findFlights(from: "LOND", to: "EDI") { object,error in
-            print(object)
+    func findFlights() {
+        flightSearchService.findFlights(from: "LOND", to: "EDI") { [weak self] object,error in
+            if let object = object {
+                _ = self?.populate(with: object)
+            } else if let error = error{
+                self?.output.error(error)
+            }
         }
-//        flightSearchService.movies(page: currentPage + 1) { [weak self] res,error  in
-//            if let res = res,
-//                let results = res.results {
-//                self?.currentPage = res.page!
-//                self?.numberOfPages = res.total_pages!
-//                var resultedMovies:[Movie] = []
-//                results.forEach {
-//                    let movie = Movie(url: self?.movieImageURL(id:$0.poster_path),
-//                                      title: $0.title,
-//                                      overview: $0.overview,
-//                                      vote: self?.formatVotes(rating:$0.vote_average),
-//                                      date: self?.formatDate($0.release_date))
-//                    if let movie = movie {
-//                        resultedMovies.append(movie)
-//                    }
-//                }
-//                DispatchQueue.main.async {
-//                    self?.output.movies( resultedMovies )
-//                }
-//            } else {
-//                self?.output.error(error!)
-//            }
-//        }
     }
     
+    func populate(with results:FlightSearchResults) -> [BookingDetails] {
+        results.itineraries?.forEach {
+            let outboundLegId = $0.outboundLegId
+            let inboundLegId = $0.inboundLegId
+            let outbound = results.legs?.filter { $0.id == outboundLegId}
+            let inbound = results.legs?.filter {  $0.id == inboundLegId }
+            
+            if let outboundDetails = outbound?.first {
+
+                let outboundFlight = FlightDetais(carrierLogoURL: "", departureTime: outboundDetails.departure! , arrivalTime: outboundDetails.arrival!, carrier: "", originStation: outboundDetails.originStation, destinationStation: outboundDetails.destinationStation, flightTime: outboundDetails.duration)
+            }
+        }
+        return []
+    }
 }

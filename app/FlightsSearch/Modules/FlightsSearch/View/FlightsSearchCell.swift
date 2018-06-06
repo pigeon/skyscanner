@@ -14,7 +14,7 @@ class FlightsSearchCell: UICollectionViewCell {
     @IBOutlet weak var stackView: UIStackView!
 
     
-    func configure(_ model:FlightSearchResult) {
+    func configure(_ model:BookingDetails) {
         //self.image.kf.indicatorType = .activity
         //self.image.kf.setImage(with: URL(string: model.imageURL)!)
 //        self.movieTitle.text = model.movieTitle

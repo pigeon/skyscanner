@@ -14,14 +14,14 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     var interactor: FlightsSearchInteractorInput!
     var selectedImageIndex:IndexPath?
     
-    var moviesList:[FlightSearchResult] = [] {
+    var moviesList:[BookingDetails] = [] {
         didSet {
           view.reload()
         }
     }
 
     func viewIsReady() {
-        interactor.getMovies()
+        interactor.findFlights()
     }
     
     func title() -> String {
@@ -32,7 +32,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
         return moviesList.count
     }
     
-    func movies(_ movies: [FlightSearchResult]) {
+    func movies(_ movies: [BookingDetails]) {
         if self.moviesList.isEmpty {
            self.moviesList = movies
         } else {
@@ -45,9 +45,9 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
         view.show(error: error)
     }
     
-    func dataModel(with index: IndexPath) -> FlightSearchResult {
+    func dataModel(with index: IndexPath) -> BookingDetails {
         if index.row == (moviesList.count - 1) {
-            interactor.getMovies()
+            interactor.findFlights()
         }
         return  moviesList[index.row]
     }

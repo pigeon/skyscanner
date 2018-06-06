@@ -9,5 +9,5 @@
 import Foundation
 
 protocol FlightsSearchInteractorInput {
-    func getMovies()
+    func findFlights()
 }
