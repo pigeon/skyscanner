@@ -74,7 +74,8 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     func findFlights() {
         flightSearchService.findFlights(from: "LOND", to: "EDI") { [weak self] object,error in
             if let object = object {
-                _ = self?.populate(with: object)
+                let res = self?.populate(with: object)
+                self?.output
             } else if let error = error{
                 self?.output.error(error)
             }
@@ -82,17 +83,30 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     func populate(with results:FlightSearchResults) -> [BookingDetails] {
+        var resultedArray = [BookingDetails]()
+        
         results.itineraries?.forEach {
             let outboundLegId = $0.outboundLegId
             let inboundLegId = $0.inboundLegId
             let outbound = results.legs?.filter { $0.id == outboundLegId}
             let inbound = results.legs?.filter {  $0.id == inboundLegId }
             
+            var outboundFlight:FlightDetais?
+            var inboundFlight:FlightDetais?
+            
             if let outboundDetails = outbound?.first {
-
-                let outboundFlight = FlightDetais(carrierLogoURL: "", departureTime: outboundDetails.departure! , arrivalTime: outboundDetails.arrival!, carrier: "", originStation: outboundDetails.originStation, destinationStation: outboundDetails.destinationStation, flightTime: outboundDetails.duration)
+                //TODO: change to the function
+                outboundFlight = FlightDetais(carrierLogoURL: "", departureTime: outboundDetails.departure! , arrivalTime: outboundDetails.arrival!, carrier: "", originStation: /*outboundDetails.originStation*/ "London", destinationStation: /*outboundDetails.destinationStation*/"Edinburgh", flightTime:  String(outboundDetails.duration!) )
             }
+            
+            if let inboundDetails = inbound?.first {
+                //TODO: change to the function
+                inboundFlight = FlightDetais(carrierLogoURL: "", departureTime: inboundDetails.departure! , arrivalTime: inboundDetails.arrival!, carrier: "", originStation: /*inboundDetails.originStation*/ "London", destinationStation: /*inboundDetails.destinationStation*/"Edinburgh", flightTime:  String(inboundDetails.duration!) )
+            }
+            
+            let booking = BookingDetails(outbountFlight: outboundFlight!, inboundFlight: inboundFlight!, rating: 5, price: 123)
+            resultedArray.append(booking)
         }
-        return []
+        return resultedArray
     }
 }

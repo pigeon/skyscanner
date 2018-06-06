@@ -9,12 +9,12 @@
 import UIKit
 
 class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput, FlightsSearchInteractorOutput {
-
+    
     weak var view: FlightsSearchViewInput!
     var interactor: FlightsSearchInteractorInput!
     var selectedImageIndex:IndexPath?
     
-    var moviesList:[BookingDetails] = [] {
+    var flightsList:[BookingDetails] = [] {
         didSet {
           view.reload()
         }
@@ -28,28 +28,29 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
         return NSLocalizedString("Popular Movies", comment: "")
     }
     
+    
     func numberOfItemsInSection() -> Int {
-        return moviesList.count
+        return flightsList.count
     }
     
-    func movies(_ movies: [BookingDetails]) {
-        if self.moviesList.isEmpty {
-           self.moviesList = movies
+    func flights(_ flights: [BookingDetails]) {
+        if self.flightsList.isEmpty {
+            self.flightsList = flights
         } else {
-            self.moviesList.append(contentsOf: movies)
+            self.flightsList.append(contentsOf: flights)
         }
         view.reload()
     }
-
+    
     func error(_ error: NSError) {
         view.show(error: error)
     }
     
     func dataModel(with index: IndexPath) -> BookingDetails {
-        if index.row == (moviesList.count - 1) {
+        if index.row == (flightsList.count - 1) {
             interactor.findFlights()
         }
-        return  moviesList[index.row]
+        return  flightsList[index.row]
     }
     
     func movieSelected(at index: IndexPath) {
