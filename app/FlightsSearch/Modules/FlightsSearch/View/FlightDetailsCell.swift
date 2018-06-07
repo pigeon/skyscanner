@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 
 class FlightDetailsCell : UITableViewCell {
     
@@ -19,10 +19,12 @@ class FlightDetailsCell : UITableViewCell {
     
     
     func configureCell(details:FlightDetais) {
-        self.carrierLogo.image = UIImage(named: "ez")
+        if let url = URL(string:details.carrierLogoURL) {
+            self.carrierLogo.kf.setImage(with:url)
+        }
         self.departureAndArrivalTime.text = "\(details.departureTime) - \(details.arrivalTime)"
         self.directFlight.text = "Direct"
         self.destinationCarrier.text = details.carrier
-        self.flightTime.text = "1:25"
+        self.flightTime.text = "\(details.flightTime)"
     }
 }

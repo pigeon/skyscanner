@@ -78,6 +78,26 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return ""
     }
     
+    func flightDuration(minutes:Int?) ->String {
+        guard let minutes = minutes else {
+            return "unknown"
+        }
+        
+        if minutes < 60 {
+            return "\(minutes)m"
+        }
+        
+        if minutes == 60 {
+            return "1h"
+        }
+        
+        let hours = minutes / 60
+        let mins = minutes - (hours * 60)
+        
+        return "\(hours)h \(mins)m"
+        
+    }
+    
     func movieImageURL(id:String?) -> String? {
         guard let id = id else {
             return nil
@@ -114,14 +134,14 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
                 let carriersString = self.carriers(with: outboundDetails.carriers,searchResults: results)
                 let carrierURL = self.carrierURL(with: (outboundDetails.carriers?.first)!,searchResults: results)
                 
-                outboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(outboundDetails.departure)! , arrivalTime: formatFlightTime(outboundDetails.arrival)!, carrier: carriersString, originStation: /*outboundDetails.originStation*/ "London", destinationStation: /*outboundDetails.destinationStation*/"Edinburgh", flightTime:  String(outboundDetails.duration!) )
+                outboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(outboundDetails.departure)! , arrivalTime: formatFlightTime(outboundDetails.arrival)!, carrier: carriersString, originStation: /*outboundDetails.originStation*/ "London", destinationStation: /*outboundDetails.destinationStation*/"Edinburgh", flightTime:  flightDuration(minutes:outboundDetails.duration) )
             }
             
             if let inboundDetails = inbound?.first {
                 //TODO: change to the function
                 let carriersString = self.carriers(with: inboundDetails.carriers,searchResults: results)
                 let carrierURL = self.carrierURL(with: (inboundDetails.carriers?.first)!,searchResults: results)
-                inboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(inboundDetails.departure)! , arrivalTime: formatFlightTime(inboundDetails.arrival)!, carrier: carriersString, originStation: /*inboundDetails.originStation*/ "London", destinationStation: /*inboundDetails.destinationStation*/"Edinburgh", flightTime:  String(inboundDetails.duration!) )
+                inboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(inboundDetails.departure)! , arrivalTime: formatFlightTime(inboundDetails.arrival)!, carrier: carriersString, originStation: /*inboundDetails.originStation*/ "London", destinationStation: /*inboundDetails.destinationStation*/"Edinburgh", flightTime:  flightDuration(minutes: inboundDetails.duration) )
             }
             
             let booking = BookingDetails(outbountFlight: outboundFlight!, inboundFlight: inboundFlight!, rating: 5, price: 123)

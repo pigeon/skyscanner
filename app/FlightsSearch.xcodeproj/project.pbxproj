@@ -31,7 +31,9 @@
 		1A49D8D6206C01FC0001FCD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8D4206C01FC0001FCD3 /* LaunchScreen.storyboard */; };
 		1A611F0E2070D9420043B084 /* FlightSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A611F0D2070D9420043B084 /* FlightSearchService.swift */; };
 		1AA6F06120756C9200C75DA2 /* ErrrorCompletionActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6F06020756C9200C75DA2 /* ErrrorCompletionActions.swift */; };
-		1AD28C4720C87460006F0143 /* FlightDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD28C4620C87460006F0143 /* FlightDetails.swift */; };
+		1AD28C4720C87460006F0143 /* FlightDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD28C4620C87460006F0143 /* FlightDetailsCell.swift */; };
+		1AD6A1FA20C9647E00A2F171 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A611F802072B6AF0043B084 /* Kingfisher.framework */; };
+		1AD6A1FB20C9647E00A2F171 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A611F802072B6AF0043B084 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F1471FB56C7B63CFAD75246 /* FlightsSearchModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D86A7D1CA558C5252B00AF3 /* FlightsSearchModuleInput.swift */; };
 		408B0F79FAC87C57A3FA94C0 /* FlightsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC660ABA91BBE231353769BB /* FlightsSearchViewController.swift */; };
 		4494D2B401930619EDB15526 /* FlightsSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD8811FF1C765947B84B96 /* FlightsSearchPresenter.swift */; };
@@ -56,6 +58,20 @@
 			remoteInfo = ImageSearch;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1AD6A1FC20C9647E00A2F171 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1AD6A1FB20C9647E00A2F171 /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A01502320C5BCA10059DE91 /* Carriers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carriers.swift; sourceTree = "<group>"; };
@@ -87,7 +103,7 @@
 		1A611F0D2070D9420043B084 /* FlightSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightSearchService.swift; sourceTree = "<group>"; };
 		1A611F802072B6AF0043B084 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		1AA6F06020756C9200C75DA2 /* ErrrorCompletionActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrrorCompletionActions.swift; sourceTree = "<group>"; };
-		1AD28C4620C87460006F0143 /* FlightDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetails.swift; sourceTree = "<group>"; };
+		1AD28C4620C87460006F0143 /* FlightDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailsCell.swift; sourceTree = "<group>"; };
 		2D86A7D1CA558C5252B00AF3 /* FlightsSearchModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlightsSearchModuleInput.swift; sourceTree = "<group>"; };
 		45B1F372DB09F6392B87E98B /* FlightsSearchViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlightsSearchViewOutput.swift; sourceTree = "<group>"; };
 		46DD8811FF1C765947B84B96 /* FlightsSearchPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlightsSearchPresenter.swift; sourceTree = "<group>"; };
@@ -109,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AD6A1FA20C9647E00A2F171 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +309,7 @@
 				B5857F0F684E3ED76AAC0FAA /* FlightsSearchViewInput.swift */,
 				45B1F372DB09F6392B87E98B /* FlightsSearchViewOutput.swift */,
 				DC660ABA91BBE231353769BB /* FlightsSearchViewController.swift */,
-				1AD28C4620C87460006F0143 /* FlightDetails.swift */,
+				1AD28C4620C87460006F0143 /* FlightDetailsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,6 +352,7 @@
 				1A49D8C5206C01FC0001FCD3 /* Frameworks */,
 				1A49D8C6206C01FC0001FCD3 /* Resources */,
 				1A08FD07207573C2008BB65F /* Taylor */,
+				1AD6A1FC20C9647E00A2F171 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -466,7 +484,7 @@
 				1A01503220C5BCA30059DE91 /* ServiceQuery.swift in Sources */,
 				1AA6F06120756C9200C75DA2 /* ErrrorCompletionActions.swift in Sources */,
 				1A1F529820C6996100E024E4 /* URLRequestUtils.swift in Sources */,
-				1AD28C4720C87460006F0143 /* FlightDetails.swift in Sources */,
+				1AD28C4720C87460006F0143 /* FlightDetailsCell.swift in Sources */,
 				1A08FD0620756F05008BB65F /* ViewController.swift in Sources */,
 				1A01503720C5BCA30059DE91 /* Segments.swift in Sources */,
 				1A611F0E2070D9420043B084 /* FlightSearchService.swift in Sources */,
