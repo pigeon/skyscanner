@@ -75,7 +75,7 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         flightSearchService.findFlights(from: "LOND", to: "EDI") { [weak self] object,error in
             if let object = object {
                 let res = self?.populate(with: object)
-                self?.output
+                self?.output.flights(res!)
             } else if let error = error{
                 self?.output.error(error)
             }
@@ -109,4 +109,6 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         }
         return resultedArray
     }
+    
+    
 }

@@ -30,8 +30,13 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     
     
     func numberOfItemsInSection() -> Int {
+        return 3 //flightsList.count
+    }
+    
+    func numberOfSections() -> Int {
         return flightsList.count
     }
+
     
     func flights(_ flights: [BookingDetails]) {
         if self.flightsList.isEmpty {
@@ -47,10 +52,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     }
     
     func dataModel(with index: IndexPath) -> BookingDetails {
-        if index.row == (flightsList.count - 1) {
-            interactor.findFlights()
-        }
-        return  flightsList[index.row]
+        return  flightsList[index.section]
     }
     
     func movieSelected(at index: IndexPath) {
