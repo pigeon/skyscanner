@@ -43,9 +43,6 @@ class FlightsSearchViewController: UIViewController, FlightsSearchViewInput {
     func setupInitialState() {
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        output.prepare(for: segue)
-    }
 }
 
 
@@ -59,9 +56,21 @@ extension FlightsSearchViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FlightDetailsCell.self), for: indexPath) as! FlightDetailsCell
-        cell.configureCell(details: self.output.dataModel(with: indexPath).inboundFlight)
-        return cell
+        
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FlightDetailsCell.self), for: indexPath) as! FlightDetailsCell
+            cell.configureCell(details: self.output.dataModel(with: indexPath).outbountFlight)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FlightDetailsCell.self), for: indexPath) as! FlightDetailsCell
+            cell.configureCell(details: self.output.dataModel(with: indexPath).inboundFlight)
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FlightDetailsCell.self), for: indexPath) as! FlightDetailsCell
+            cell.configureCell(details: self.output.dataModel(with: indexPath).inboundFlight)
+            return cell
+        }
     }
     
     

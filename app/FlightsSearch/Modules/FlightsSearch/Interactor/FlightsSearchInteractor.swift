@@ -32,18 +32,18 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     weak var output: FlightsSearchInteractorOutput!
     let flightSearchService:FlightSearchService
     
-    var numberOfPages = 0
-    var currentPage = 0
     
     lazy var dateFormatterFrom:DateFormatter = {
         var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         return dateFormatter
     }()
 
     lazy var dateFormatterTo:DateFormatter = {
         var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        dateFormatter.dateFormat = "HH:mm"
         return dateFormatter
     }()
     
@@ -51,18 +51,32 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         flightSearchService = service
     }
     
-    func formatDate(_ date:String?) -> String? {
+    func formatFlightTime(_ date:String?) -> String? {
         
-        guard let date = date else {
+        guard let date = date, let flightDate = self.dateFormatterFrom.date(from:date) else {
             return nil
         }
-
-        if let d = dateFormatterFrom.date(from: date){
-            return dateFormatterTo.string(from: d)
-        }
-        return date
+        
+        return self.dateFormatterTo.string(from: flightDate)
     }
     
+    func carriers(with ids:[Int]?,searchResults:FlightSearchResults) -> String {
+        var resultedString = ""
+        ids?.forEach {
+            let carrierID = $0
+            if let carrier = searchResults.carriers?.index(where: { $0.id == carrierID }) {
+                resultedString += (searchResults.carriers?[carrier].name)!
+            }
+        }
+        return resultedString
+    }
+
+    func carrierURL(with id:Int,searchResults:FlightSearchResults) -> String {
+            if let carrier = searchResults.carriers?.index(where: { $0.id == id }) {
+                return (searchResults.carriers?[carrier].imageUrl)!
+            }
+        return ""
+    }
     
     func movieImageURL(id:String?) -> String? {
         guard let id = id else {
@@ -96,12 +110,18 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
             
             if let outboundDetails = outbound?.first {
                 //TODO: change to the function
-                outboundFlight = FlightDetais(carrierLogoURL: "", departureTime: outboundDetails.departure! , arrivalTime: outboundDetails.arrival!, carrier: "", originStation: /*outboundDetails.originStation*/ "London", destinationStation: /*outboundDetails.destinationStation*/"Edinburgh", flightTime:  String(outboundDetails.duration!) )
+                
+                let carriersString = self.carriers(with: outboundDetails.carriers,searchResults: results)
+                let carrierURL = self.carrierURL(with: (outboundDetails.carriers?.first)!,searchResults: results)
+                
+                outboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(outboundDetails.departure)! , arrivalTime: formatFlightTime(outboundDetails.arrival)!, carrier: carriersString, originStation: /*outboundDetails.originStation*/ "London", destinationStation: /*outboundDetails.destinationStation*/"Edinburgh", flightTime:  String(outboundDetails.duration!) )
             }
             
             if let inboundDetails = inbound?.first {
                 //TODO: change to the function
-                inboundFlight = FlightDetais(carrierLogoURL: "", departureTime: inboundDetails.departure! , arrivalTime: inboundDetails.arrival!, carrier: "", originStation: /*inboundDetails.originStation*/ "London", destinationStation: /*inboundDetails.destinationStation*/"Edinburgh", flightTime:  String(inboundDetails.duration!) )
+                let carriersString = self.carriers(with: inboundDetails.carriers,searchResults: results)
+                let carrierURL = self.carrierURL(with: (inboundDetails.carriers?.first)!,searchResults: results)
+                inboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(inboundDetails.departure)! , arrivalTime: formatFlightTime(inboundDetails.arrival)!, carrier: carriersString, originStation: /*inboundDetails.originStation*/ "London", destinationStation: /*inboundDetails.destinationStation*/"Edinburgh", flightTime:  String(inboundDetails.duration!) )
             }
             
             let booking = BookingDetails(outbountFlight: outboundFlight!, inboundFlight: inboundFlight!, rating: 5, price: 123)

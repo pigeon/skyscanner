@@ -25,7 +25,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     }
     
     func title() -> String {
-        return NSLocalizedString("Popular Movies", comment: "")
+        return NSLocalizedString("", comment: "")
     }
     
     
@@ -57,17 +57,6 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     
     func movieSelected(at index: IndexPath) {
         selectedImageIndex = index
-    }
-    
-    func prepare(for segue: UIStoryboardSegue) {
-//        guard let dest = segue.destination as? FullScreenViewController ,
-//            let module = dest.output as? FullScreenModuleInput,
-//            let index = selectedImageIndex else {
-//            return
-//        }
-//        module.imageURL = moviesList[index.row].imageURL
-//        module.title = moviesList[index.row].movieTitle
-        
     }
     
 }

@@ -20,9 +20,9 @@ class FlightDetailsCell : UITableViewCell {
     
     func configureCell(details:FlightDetais) {
         self.carrierLogo.image = UIImage(named: "ez")
-        self.departureAndArrivalTime.text = "\(details.departureTime)-\(details.arrivalTime)"
+        self.departureAndArrivalTime.text = "\(details.departureTime) - \(details.arrivalTime)"
         self.directFlight.text = "Direct"
-        self.destinationCarrier.text = "EasyJet"
+        self.destinationCarrier.text = details.carrier
         self.flightTime.text = "1:25"
     }
 }

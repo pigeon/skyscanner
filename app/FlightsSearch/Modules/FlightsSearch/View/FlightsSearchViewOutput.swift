@@ -18,6 +18,5 @@ protocol FlightsSearchViewOutput {
     func numberOfItemsInSection() -> Int
     func numberOfSections() -> Int
     func dataModel(with index:IndexPath) -> BookingDetails
-    func prepare(for segue: UIStoryboardSegue)
     func title() -> String
 }
