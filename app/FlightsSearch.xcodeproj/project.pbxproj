@@ -29,6 +29,7 @@
 		1A49D8D1206C01FC0001FCD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8CF206C01FC0001FCD3 /* Main.storyboard */; };
 		1A49D8D3206C01FC0001FCD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8D2206C01FC0001FCD3 /* Assets.xcassets */; };
 		1A49D8D6206C01FC0001FCD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8D4206C01FC0001FCD3 /* LaunchScreen.storyboard */; };
+		1A5726E020C9CD2100661CA7 /* FlightPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5726DF20C9CD2100661CA7 /* FlightPriceCell.swift */; };
 		1A611F0E2070D9420043B084 /* FlightSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A611F0D2070D9420043B084 /* FlightSearchService.swift */; };
 		1AA6F06120756C9200C75DA2 /* ErrrorCompletionActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6F06020756C9200C75DA2 /* ErrrorCompletionActions.swift */; };
 		1AD28C4720C87460006F0143 /* FlightDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD28C4620C87460006F0143 /* FlightDetailsCell.swift */; };
@@ -100,6 +101,7 @@
 		1A49D8D7206C01FC0001FCD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A49D8DC206C01FC0001FCD3 /* FlightsSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlightsSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A49D8E2206C01FC0001FCD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A5726DF20C9CD2100661CA7 /* FlightPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightPriceCell.swift; sourceTree = "<group>"; };
 		1A611F0D2070D9420043B084 /* FlightSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightSearchService.swift; sourceTree = "<group>"; };
 		1A611F802072B6AF0043B084 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		1AA6F06020756C9200C75DA2 /* ErrrorCompletionActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrrorCompletionActions.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				45B1F372DB09F6392B87E98B /* FlightsSearchViewOutput.swift */,
 				DC660ABA91BBE231353769BB /* FlightsSearchViewController.swift */,
 				1AD28C4620C87460006F0143 /* FlightDetailsCell.swift */,
+				1A5726DF20C9CD2100661CA7 /* FlightPriceCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				408B0F79FAC87C57A3FA94C0 /* FlightsSearchViewController.swift in Sources */,
 				1A01503520C5BCA30059DE91 /* FlightSearchResults.swift in Sources */,
 				1A01503020C5BCA30059DE91 /* Carriers.swift in Sources */,
+				1A5726E020C9CD2100661CA7 /* FlightPriceCell.swift in Sources */,
 				1A01503A20C5BCA30059DE91 /* Currencies.swift in Sources */,
 				1A01503920C5BCA30059DE91 /* FlightNumbers.swift in Sources */,
 				1F1471FB56C7B63CFAD75246 /* FlightsSearchModuleInput.swift in Sources */,

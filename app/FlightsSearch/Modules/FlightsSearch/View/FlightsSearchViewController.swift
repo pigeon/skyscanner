@@ -67,8 +67,8 @@ extension FlightsSearchViewController : UITableViewDataSource {
             cell.configureCell(details: self.output.dataModel(with: indexPath).inboundFlight)
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FlightDetailsCell.self), for: indexPath) as! FlightDetailsCell
-            cell.configureCell(details: self.output.dataModel(with: indexPath).inboundFlight)
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FlightPriceCell.self), for: indexPath) as! FlightPriceCell
+            cell.configureCell(details: self.output.dataModel(with: indexPath))
             return cell
         }
     }

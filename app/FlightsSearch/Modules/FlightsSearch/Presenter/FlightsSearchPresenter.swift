@@ -16,7 +16,9 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     
     var flightsList:[BookingDetails] = [] {
         didSet {
-          view.reload()
+            DispatchQueue.main.async {
+                self.view.reload()
+            }
         }
     }
 
@@ -30,7 +32,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     
     
     func numberOfItemsInSection() -> Int {
-        return 3 //flightsList.count
+        return 3 
     }
     
     func numberOfSections() -> Int {
@@ -44,7 +46,9 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
         } else {
             self.flightsList.append(contentsOf: flights)
         }
-        view.reload()
+        DispatchQueue.main.async {
+            self.view.reload()
+        }
     }
     
     func error(_ error: NSError) {
