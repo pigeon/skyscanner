@@ -25,6 +25,7 @@ struct BookingDetails {
     let inboundFlight:FlightDetais
     let rating:Double
     let price:Double
+    let currency:String
 }
 
 class FlightsSearchInteractor: FlightsSearchInteractorInput {
@@ -109,12 +110,12 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
 
-    
-    func movieImageURL(id:String?) -> String? {
-        guard let id = id else {
-            return nil
+    func bestPrice(for itineraries:Itineraries) -> Double {
+        guard let bestOption = itineraries.pricingOptions?.first,
+              let price = bestOption.price else {
+            return 0.0
         }
-        return "http://image.tmdb.org/t/p/w500/\(id)"
+        return price
     }
     
     func findFlights() {
@@ -130,6 +131,8 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     
     func populate(with results:FlightSearchResults) -> [BookingDetails] {
         var resultedArray = [BookingDetails]()
+    
+        let currency = results.query?.currency ?? ""
         
         results.itineraries?.forEach {
             let outboundLegId = $0.outboundLegId
@@ -168,7 +171,7 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
                 inboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(inboundDetails.departure)! , arrivalTime: formatFlightTime(inboundDetails.arrival)!, carrier: carriersString, originStation: origin, destinationStation: destination, flightTime:  flightDuration(minutes: inboundDetails.duration) )
             }
             
-            let booking = BookingDetails(outbountFlight: outboundFlight!, inboundFlight: inboundFlight!, rating: 5, price: 123)
+            let booking = BookingDetails(outbountFlight: outboundFlight!, inboundFlight: inboundFlight!, rating: 5, price: bestPrice(for: $0), currency: currency)
             resultedArray.append(booking)
         }
         return resultedArray

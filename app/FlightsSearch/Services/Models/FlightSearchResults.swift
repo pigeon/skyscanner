@@ -29,7 +29,7 @@ struct FlightSearchResults : Codable {
 	enum CodingKeys: String, CodingKey {
 
 		case sessionKey = "SessionKey"
-		case query
+		case query = "Query"
 		case status = "Status"
 		case itineraries = "Itineraries"
 		case legs = "Legs"
@@ -44,7 +44,7 @@ struct FlightSearchResults : Codable {
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		sessionKey = try values.decodeIfPresent(String.self, forKey: .sessionKey)
-		query = try Query(from: decoder)
+		query = try values.decodeIfPresent(Query.self, forKey: .query)
 		status = try values.decodeIfPresent(String.self, forKey: .status)
 		itineraries = try values.decodeIfPresent([Itineraries].self, forKey: .itineraries)
 		legs = try values.decodeIfPresent([Legs].self, forKey: .legs)

@@ -13,6 +13,7 @@ extension Color {
     struct FlightDetails {
         static var mainTextColor: Color  { return Color(red:0.33, green:0.30, blue:0.39, alpha:1.0) }
         static var secondaryTextColor: Color { return Color(red:0.54, green:0.51, blue:0.58, alpha:0.74) }
+        static var greenTextColor: Color { return Color(red:0.00, green:0.84, blue:0.46, alpha:1.0) }
     }
 }
 

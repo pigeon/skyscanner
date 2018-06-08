@@ -98,17 +98,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile" translatesAutoresizingMaskIntoConstraints="NO" id="1MA-bY-HLW">
+                                                    <rect key="frame" x="15" y="8" width="16" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="hDH-Km-2xG"/>
+                                                        <constraint firstAttribute="width" constant="16" id="vAc-wh-OPc"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3US-7l-sM2">
-                                                    <rect key="frame" x="15" y="5" width="355" height="24"/>
+                                                    <rect key="frame" x="33" y="5" width="337" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyR-iA-kaz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="302" height="24"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="284" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfw-Ml-Jn5">
-                                                            <rect key="frame" x="307" y="0.0" width="48" height="24"/>
+                                                            <rect key="frame" x="289" y="0.0" width="48" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -134,12 +141,14 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zQD-7L-zGC" firstAttribute="leading" secondItem="3US-7l-sM2" secondAttribute="leading" id="2Af-lk-TzR"/>
                                                 <constraint firstItem="zQD-7L-zGC" firstAttribute="top" secondItem="3US-7l-sM2" secondAttribute="bottom" id="5Fg-Pt-OsE"/>
+                                                <constraint firstItem="1MA-bY-HLW" firstAttribute="leading" secondItem="Dzv-Dd-ZfS" secondAttribute="leading" constant="15" id="L22-5k-Fd6"/>
                                                 <constraint firstAttribute="trailing" secondItem="3US-7l-sM2" secondAttribute="trailing" constant="5" id="T3U-ha-uAT"/>
+                                                <constraint firstItem="zQD-7L-zGC" firstAttribute="leading" secondItem="1MA-bY-HLW" secondAttribute="leading" id="ToH-8g-hEm"/>
+                                                <constraint firstItem="1MA-bY-HLW" firstAttribute="top" secondItem="Dzv-Dd-ZfS" secondAttribute="top" constant="8" id="cOi-xw-LDx"/>
                                                 <constraint firstItem="zQD-7L-zGC" firstAttribute="trailing" secondItem="3US-7l-sM2" secondAttribute="trailing" id="gtN-wf-DUq"/>
-                                                <constraint firstItem="3US-7l-sM2" firstAttribute="leading" secondItem="Dzv-Dd-ZfS" secondAttribute="leading" constant="15" id="qkp-Xo-cyA"/>
                                                 <constraint firstItem="3US-7l-sM2" firstAttribute="top" secondItem="Dzv-Dd-ZfS" secondAttribute="top" constant="5" id="rIf-xO-8aK"/>
+                                                <constraint firstItem="3US-7l-sM2" firstAttribute="leading" secondItem="1MA-bY-HLW" secondAttribute="trailing" constant="2" id="tU0-Ss-bsb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -199,5 +208,6 @@
     </scenes>
     <resources>
         <image name="ez" width="64" height="64"/>
+        <image name="smile" width="20" height="20"/>
     </resources>
 </document>

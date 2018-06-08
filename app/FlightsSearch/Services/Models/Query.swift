@@ -19,8 +19,8 @@ struct Query : Codable {
 	let adults : Int?
 	let children : Int?
 	let infants : Int?
-	let originPlace : Int?
-	let destinationPlace : Int?
+	let originPlace : String?
+	let destinationPlace : String?
 	let outboundDate : String?
 	let inboundDate : String?
 	let locationSchema : String?
@@ -52,8 +52,8 @@ struct Query : Codable {
 		adults = try values.decodeIfPresent(Int.self, forKey: .adults)
 		children = try values.decodeIfPresent(Int.self, forKey: .children)
 		infants = try values.decodeIfPresent(Int.self, forKey: .infants)
-		originPlace = try values.decodeIfPresent(Int.self, forKey: .originPlace)
-		destinationPlace = try values.decodeIfPresent(Int.self, forKey: .destinationPlace)
+		originPlace = try values.decodeIfPresent(String.self, forKey: .originPlace)
+		destinationPlace = try values.decodeIfPresent(String.self, forKey: .destinationPlace)
 		outboundDate = try values.decodeIfPresent(String.self, forKey: .outboundDate)
 		inboundDate = try values.decodeIfPresent(String.self, forKey: .inboundDate)
 		locationSchema = try values.decodeIfPresent(String.self, forKey: .locationSchema)
