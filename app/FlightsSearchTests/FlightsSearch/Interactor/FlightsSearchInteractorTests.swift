@@ -31,6 +31,7 @@ class MoviesListInteractorTests: XCTestCase {
     }
     
     func testFlightDuration() {
+        XCTAssertTrue(interactor.flightDuration(minutes: nil) == "unknown", "Flight time conversion is not correct")
         XCTAssertTrue(interactor.flightDuration(minutes: 25) == "25m", "Flight time conversion is not correct")
         XCTAssertTrue(interactor.flightDuration(minutes: 0) == "0m", "Flight time conversion is not correct")
         XCTAssertTrue(interactor.flightDuration(minutes: 65) == "1h 5m", "Flight time conversion is not correct")

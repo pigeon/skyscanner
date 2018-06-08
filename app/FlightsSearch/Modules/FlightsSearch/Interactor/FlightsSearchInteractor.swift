@@ -92,18 +92,15 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     func flightDuration(minutes:Int?) ->String {
         guard let minutes = minutes else {
             return "unknown"
-        }
-        
+        }        
         if minutes < 60 {
             return "\(minutes)m"
         }
-        
         if minutes == 60 {
             return "1h"
         }
         let hours = minutes / 60
         let mins = minutes - (hours * 60)
-        
         return mins == 0 ? "\(hours)h" : "\(hours)h \(mins)m"
     }
     
