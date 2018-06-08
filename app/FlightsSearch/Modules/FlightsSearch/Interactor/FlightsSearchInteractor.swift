@@ -52,10 +52,10 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         flightSearchService = service
     }
     
-    func formatFlightTime(_ date:String?) -> String? {
+    func formatFlightTime(_ date:String?) -> String {
         
         guard let date = date, let flightDate = self.dateFormatterFrom.date(from:date) else {
-            return nil
+            return ""
         }
         
         return self.dateFormatterTo.string(from: flightDate)
@@ -101,12 +101,9 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         if minutes == 60 {
             return "1h"
         }
-        
         let hours = minutes / 60
         let mins = minutes - (hours * 60)
-        
         return "\(hours)h \(mins)m"
-        
     }
     
 
@@ -116,6 +113,21 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
             return 0.0
         }
         return price
+    }
+    
+    func populateFlight(with leg:Legs,results:FlightSearchResults) -> FlightDetais {
+        let carriersString = self.carriers(with: leg.carriers,searchResults: results)
+        let carrierURL = self.carrierURL(with: (leg.carriers?.first)!,searchResults: results)
+        let origin = placeName(with: leg.originStation, searchResults: results)
+        let destination = placeName(with: leg.destinationStation, searchResults: results)
+        
+        return   FlightDetais(carrierLogoURL: carrierURL,
+                                      departureTime: formatFlightTime(leg.departure),
+                                      arrivalTime: formatFlightTime(leg.arrival),
+                                      carrier: carriersString,
+                                      originStation:  origin,
+                                      destinationStation: destination,
+                                      flightTime:  flightDuration(minutes:leg.duration) )
     }
     
     func findFlights() {
@@ -130,48 +142,23 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     func populate(with results:FlightSearchResults) -> [BookingDetails] {
+        
+        guard let itineraries = results.itineraries else {
+            return []
+        }
+        
         var resultedArray = [BookingDetails]()
     
         let currency = results.query?.currency ?? ""
         
-        results.itineraries?.forEach {
-            let outboundLegId = $0.outboundLegId
-            let inboundLegId = $0.inboundLegId
-            let outbound = results.legs?.filter { $0.id == outboundLegId}
-            let inbound = results.legs?.filter {  $0.id == inboundLegId }
-            
-            var outboundFlight:FlightDetais?
-            var inboundFlight:FlightDetais?
-            
-            if let outboundDetails = outbound?.first {
-                //TODO: change to the function
-                
-                let carriersString = self.carriers(with: outboundDetails.carriers,searchResults: results)
-                let carrierURL = self.carrierURL(with: (outboundDetails.carriers?.first)!,searchResults: results)
-                let origin = placeName(with: outboundDetails.originStation, searchResults: results)
-                let destination = placeName(with: outboundDetails.destinationStation, searchResults: results)
-                
-                outboundFlight = FlightDetais(carrierLogoURL: carrierURL,
-                                              departureTime: formatFlightTime(outboundDetails.departure)! ,
-                                              arrivalTime: formatFlightTime(outboundDetails.arrival)!,
-                                              carrier: carriersString,
-                                              originStation:  origin,
-                                              destinationStation: destination,
-                                              flightTime:  flightDuration(minutes:outboundDetails.duration) )
+        for itinerary in itineraries {
+            guard let outbound = results.legs?.filter({ $0.id == itinerary.outboundLegId}).first,
+                  let inbound = results.legs?.filter({  $0.id == itinerary.inboundLegId }).first else {
+                continue
             }
-            
-            if let inboundDetails = inbound?.first {
-                //TODO: change to the function
-                let carriersString = self.carriers(with: inboundDetails.carriers,searchResults: results)
-                let carrierURL = self.carrierURL(with: (inboundDetails.carriers?.first)!,searchResults: results)
-                let origin = placeName(with: inboundDetails.originStation, searchResults: results)
-                let destination = placeName(with: inboundDetails.destinationStation, searchResults: results)
-
-                
-                inboundFlight = FlightDetais(carrierLogoURL: carrierURL, departureTime: formatFlightTime(inboundDetails.departure)! , arrivalTime: formatFlightTime(inboundDetails.arrival)!, carrier: carriersString, originStation: origin, destinationStation: destination, flightTime:  flightDuration(minutes: inboundDetails.duration) )
-            }
-            
-            let booking = BookingDetails(outbountFlight: outboundFlight!, inboundFlight: inboundFlight!, rating: 5, price: bestPrice(for: $0), currency: currency)
+            let outboundFlight = populateFlight(with: outbound, results: results)
+            let inboundFlight = populateFlight(with: inbound, results: results)
+            let booking = BookingDetails(outbountFlight: outboundFlight, inboundFlight: inboundFlight, rating: 5, price: bestPrice(for: itinerary), currency: currency)
             resultedArray.append(booking)
         }
         return resultedArray
