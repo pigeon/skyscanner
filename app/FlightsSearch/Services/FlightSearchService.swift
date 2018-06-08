@@ -1,9 +1,9 @@
 //
-//  TwitterSearchService.swift
-//  Movies
+//  FlightSearchService.swift
 //
-//  Created by Dmytro Golub on 09/04/2018.
-//  Copyright © 2018 Paysafe. All rights reserved.
+//
+//  Created by magic on 08/06/2018.
+//
 //
 
 import Foundation
