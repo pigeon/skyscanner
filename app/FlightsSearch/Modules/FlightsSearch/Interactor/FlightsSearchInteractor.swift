@@ -103,7 +103,8 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         }
         let hours = minutes / 60
         let mins = minutes - (hours * 60)
-        return "\(hours)h \(mins)m"
+        
+        return mins == 0 ? "\(hours)h" : "\(hours)h \(mins)m"
     }
     
 

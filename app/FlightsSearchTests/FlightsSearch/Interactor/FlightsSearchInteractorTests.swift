@@ -24,37 +24,28 @@ class MoviesListInteractorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testVotesString() {
-        XCTAssertTrue(interactor.vote(for: 6.6) == "66%", "Not expected vote")
-        XCTAssertTrue(interactor.vote(for:  0.6) == "6%", "Not expected vote")
-        XCTAssertTrue(interactor.vote(for:  5.5) == "55%", "Not expected vote")
-        XCTAssertTrue(interactor.vote(for:  10.0) == "100%", "Not expected vote")
-        XCTAssertTrue(interactor.vote(for:  0.0) == "0%", "Not expected vote")
-        XCTAssertFalse(interactor.vote(for:  1.0) == "5%", "Not expected vote")
+    func testFormatFlightTime() {
+        XCTAssertTrue(interactor.formatFlightTime("2018-06-10T06:20:00") == "07:20","time is not matching")
+        XCTAssertTrue(interactor.formatFlightTime("2018-06-18T16:20:00") == "17:20","time is not matching")
+        XCTAssertTrue(interactor.formatFlightTime("2018-06-15T20:20:00") == "21:20","time is not matching")
     }
     
-    func testDateFormatting() {
-        let expected = "February 07, 2018"
-        let actual = interactor.formatDate("2018-02-07")
-        XCTAssertTrue( expected == actual,"Not expected date format. Expected \(expected) - actual \(String(describing: actual))")
-    }
-
-    func testColour() {
-        XCTAssertTrue(interactor.colour(for: 8.0) == greenColour, "Colour not expected")
-        XCTAssertTrue(interactor.colour(for: 7.0) == greenColour, "Colour not expected")
-        XCTAssertTrue(interactor.colour(for: 5.1) == UIColor.orange, "Colour not expected")
-        XCTAssertTrue(interactor.colour(for: 4) == UIColor.orange, "Colour not expected")
-        XCTAssertTrue(interactor.colour(for: 3.9) == UIColor.red, "Colour not expected")
-        XCTAssertTrue(interactor.colour(for: 0.9) == UIColor.red, "Colour not expected")
+    func testFlightDuration() {
+        XCTAssertTrue(interactor.flightDuration(minutes: 25) == "25m", "Flight time conversion is not correct")
+        XCTAssertTrue(interactor.flightDuration(minutes: 0) == "0m", "Flight time conversion is not correct")
+        XCTAssertTrue(interactor.flightDuration(minutes: 65) == "1h 5m", "Flight time conversion is not correct")
+        XCTAssertTrue(interactor.flightDuration(minutes: 300) == "5h", "Flight time conversion is not correct")
+        XCTAssertTrue(interactor.flightDuration(minutes: 217) == "3h 37m", "Flight time conversion is not correct")
     }
     
     class MockPresenter: FlightsSearchInteractorOutput {
+        func flights(_: [BookingDetails]) {
+            
+        }
+        
         func error(_: NSError) {
             
         }
         
-        func movies(_: [Movie]) {
-            
-        }
     }
 }

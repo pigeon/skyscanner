@@ -22,9 +22,10 @@ class MoviesPresenterTest: XCTestCase {
     }
 
     class MockInteractor: FlightsSearchInteractorInput {
-        func getMovies() {
+        func findFlights() {
             
         }
+        
         
         
     }
