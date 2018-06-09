@@ -8,10 +8,17 @@
 
 import UIKit
 
+extension CGRect {
+    init(_ x:CGFloat, _ y:CGFloat, _ w:CGFloat, _ h:CGFloat) {
+        self.init(x:x, y:y, width:w, height:h)
+    }
+}
+
 
 class FlightsSearchViewController: UIViewController, FlightsSearchViewInput {
 
     var output: FlightsSearchViewOutput!
+    var navigationBarView:NavigationBar?
     
     @IBOutlet weak var collectionView: UITableView!
     
@@ -21,17 +28,24 @@ class FlightsSearchViewController: UIViewController, FlightsSearchViewInput {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
-                                                                style: .plain,
-                                                                target: nil,
-                                                                action: nil)
-
-        self.navigationItem.title = output.title()
+        
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        navigationBarView = NavigationBar(frame:CGRect(0,0,self.view.bounds.size.width,89 + 22))
+        
+        self.navigationController?.view.insertSubview(navigationBarView!, aboveSubview: (navigationController?.navigationBar)!)
+        
         output.viewIsReady()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationBarView?.numberOfResults.text = output.numberOfResults()
+        navigationBarView?.title.text = output.title()
+        navigationBarView?.dates.text = output.subTitle()
+        
     }
     
     

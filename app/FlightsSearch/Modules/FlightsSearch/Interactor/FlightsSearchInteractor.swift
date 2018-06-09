@@ -26,6 +26,8 @@ struct BookingDetails {
     let rating:Double
     let price:Double
     let currency:String
+    let originPlace:String
+    let destinationPlace:String
 }
 
 class FlightsSearchInteractor: FlightsSearchInteractorInput {
@@ -54,7 +56,7 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return dateFormatter
     }()
     
-    init(service:FlightSearchService = /*FlightsSearchServiceMock()*/ FlightSearchServiceImpl()) {
+    init(service:FlightSearchService = FlightsSearchServiceMock() /*FlightSearchServiceImpl()*/) {
         flightSearchService = service
     }
     
@@ -108,11 +110,22 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return ""
     }
     
-    func placeName(with id:Int?,searchResults:FlightSearchResults) -> String {
+    func placeCode(with id:Int?,searchResults:FlightSearchResults) -> String {
         guard let id = id,
               let place = searchResults.places?.index(where: { $0.id == id }),
               let code = searchResults.places?[place].code else {
             return "unknown"
+        }
+        
+        return code
+    }
+    
+    
+    func placeName(with id:Int?,searchResults:FlightSearchResults) -> String {
+        guard let id = id,
+            let place = searchResults.places?.index(where: { $0.id == id }),
+            let code = searchResults.places?[place].name else {
+                return "unknown"
         }
         
         return code
@@ -142,11 +155,28 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return price
     }
     
+    func findFlights() {
+        let outboundDate = self.nextMonday(since: Date())
+        let inboundDate = self.nextDay(after: outboundDate)
+        
+        flightSearchService.findFlights(from: "LOND",
+                                        to: "EDI",
+                                        outboundDate:self.dateFormatterFlayingDate.string(from: outboundDate),
+                                        inboundDate: self.dateFormatterFlayingDate.string(from: inboundDate)) { [weak self] object,error in
+                                            if let object = object {
+                                                let res = self?.populate(with: object)
+                                                self?.output.flights(res!)
+                                            } else if let error = error{
+                                                self?.output.error(error)
+                                            }
+        }
+    }
+    
     func populateFlight(with leg:Legs,results:FlightSearchResults) -> FlightDetais {
         let carriersString = self.carriers(with: leg.carriers,searchResults: results)
         let carrierURL = self.carrierURL(with: (leg.carriers?.first)!,searchResults: results)
-        let origin = placeName(with: leg.originStation, searchResults: results)
-        let destination = placeName(with: leg.destinationStation, searchResults: results)
+        let origin = placeCode(with: leg.originStation, searchResults: results)
+        let destination = placeCode(with: leg.destinationStation, searchResults: results)
         
         return   FlightDetais(carrierLogoURL: carrierURL,
                                       departureTime: formatFlightTime(leg.departure),
@@ -157,22 +187,7 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
                                       flightTime:  flightDuration(minutes:leg.duration) )
     }
     
-    func findFlights() {
-        let outboundDate = self.nextMonday(since: Date())
-        let inboundDate = self.nextDay(after: outboundDate)
-        
-        flightSearchService.findFlights(from: "LOND",
-                                        to: "EDI",
-                                        outboundDate:self.dateFormatterFlayingDate.string(from: outboundDate),
-                                        inboundDate: self.dateFormatterFlayingDate.string(from: inboundDate)) { [weak self] object,error in
-            if let object = object {
-                let res = self?.populate(with: object)
-                self?.output.flights(res!)
-            } else if let error = error{
-                self?.output.error(error)
-            }
-        }
-    }
+
     
     func populate(with results:FlightSearchResults) -> [BookingDetails] {
         
@@ -191,7 +206,11 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
             }
             let outboundFlight = populateFlight(with: outbound, results: results)
             let inboundFlight = populateFlight(with: inbound, results: results)
-            let booking = BookingDetails(outbountFlight: outboundFlight, inboundFlight: inboundFlight, rating: 5, price: bestPrice(for: itinerary), currency: currency)
+            let originPlace = placeName(with: outbound.originStation, searchResults: results)
+            let destinationPlace = placeName(with: outbound.destinationStation, searchResults: results)
+
+            
+            let booking = BookingDetails(outbountFlight: outboundFlight, inboundFlight: inboundFlight, rating: 5, price: bestPrice(for: itinerary), currency: currency, originPlace: originPlace, destinationPlace: destinationPlace)
             resultedArray.append(booking)
         }
         return resultedArray

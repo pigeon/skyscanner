@@ -10,6 +10,7 @@ import UIKit
 
 class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput, FlightsSearchInteractorOutput {
     
+    
     weak var view: FlightsSearchViewInput!
     var interactor: FlightsSearchInteractorInput!
     var selectedImageIndex:IndexPath?
@@ -27,7 +28,20 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     }
     
     func title() -> String {
-        return NSLocalizedString("", comment: "")
+        guard let origin = flightsList.first?.originPlace,
+              let destination = flightsList.first?.destinationPlace else {
+                return ""
+        }
+        
+        return "\(origin)-\(destination)"
+    }
+    
+    func subTitle() -> String {
+        return ""
+    }
+    
+    func numberOfResults() -> String {
+        return "\(flightsList.count) of \(flightsList.count) results shown"
     }
     
     

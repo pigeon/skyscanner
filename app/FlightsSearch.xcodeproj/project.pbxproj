@@ -31,6 +31,8 @@
 		1A49D8D6206C01FC0001FCD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A49D8D4206C01FC0001FCD3 /* LaunchScreen.storyboard */; };
 		1A5726E020C9CD2100661CA7 /* FlightPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5726DF20C9CD2100661CA7 /* FlightPriceCell.swift */; };
 		1A5726E220CB271400661CA7 /* FlightSeatchTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5726E120CB271400661CA7 /* FlightSeatchTabBarViewController.swift */; };
+		1A5726E420CC639E00661CA7 /* NavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A5726E320CC639E00661CA7 /* NavigationBar.xib */; };
+		1A5726E620CC63FF00661CA7 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5726E520CC63FF00661CA7 /* NavigationBar.swift */; };
 		1A611F0E2070D9420043B084 /* FlightSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A611F0D2070D9420043B084 /* FlightSearchService.swift */; };
 		1AA6F06120756C9200C75DA2 /* ErrrorCompletionActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6F06020756C9200C75DA2 /* ErrrorCompletionActions.swift */; };
 		1AD28C4720C87460006F0143 /* FlightDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD28C4620C87460006F0143 /* FlightDetailsCell.swift */; };
@@ -104,6 +106,8 @@
 		1A49D8E2206C01FC0001FCD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A5726DF20C9CD2100661CA7 /* FlightPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightPriceCell.swift; sourceTree = "<group>"; };
 		1A5726E120CB271400661CA7 /* FlightSeatchTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightSeatchTabBarViewController.swift; sourceTree = "<group>"; };
+		1A5726E320CC639E00661CA7 /* NavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationBar.xib; sourceTree = "<group>"; };
+		1A5726E520CC63FF00661CA7 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		1A5F9C0F20CAD358007E0749 /* FOLLOW-UP.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = "FOLLOW-UP.md"; path = "../FOLLOW-UP.md"; sourceTree = "<group>"; };
 		1A611F0D2070D9420043B084 /* FlightSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightSearchService.swift; sourceTree = "<group>"; };
 		1A611F802072B6AF0043B084 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				1A611F0C2070D9200043B084 /* Services */,
 				5199AA7367B4C3B127D145CF /* Modules */,
 				1A49D8CB206C01FC0001FCD3 /* AppDelegate.swift */,
+				1A5726E320CC639E00661CA7 /* NavigationBar.xib */,
+				1A5726E520CC63FF00661CA7 /* NavigationBar.swift */,
 				1A5726E120CB271400661CA7 /* FlightSeatchTabBarViewController.swift */,
 				1A49D8CF206C01FC0001FCD3 /* Main.storyboard */,
 				1A49D8D2206C01FC0001FCD3 /* Assets.xcassets */,
@@ -438,6 +444,7 @@
 				1A49D8D3206C01FC0001FCD3 /* Assets.xcassets in Resources */,
 				1A2E45CB20C7345300FF1779 /* results.json in Resources */,
 				1A49D8D1206C01FC0001FCD3 /* Main.storyboard in Resources */,
+				1A5726E420CC639E00661CA7 /* NavigationBar.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +484,7 @@
 				1A5726E220CB271400661CA7 /* FlightSeatchTabBarViewController.swift in Sources */,
 				1A49D8CC206C01FC0001FCD3 /* AppDelegate.swift in Sources */,
 				1A01503C20C5BCA30059DE91 /* Places.swift in Sources */,
+				1A5726E620CC63FF00661CA7 /* NavigationBar.swift in Sources */,
 				16EE7052038E01FFDBE2431D /* FlightsSearchViewInput.swift in Sources */,
 				1A01503620C5BCA30059DE91 /* Itineraries.swift in Sources */,
 				F68BE5CB52E24446431ADF5C /* FlightsSearchViewOutput.swift in Sources */,

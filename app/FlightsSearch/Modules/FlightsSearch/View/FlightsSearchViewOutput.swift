@@ -18,5 +18,9 @@ protocol FlightsSearchViewOutput {
     func numberOfItemsInSection() -> Int
     func numberOfSections() -> Int
     func dataModel(with index:IndexPath) -> BookingDetails
+    
     func title() -> String
+    func subTitle()->String
+    func numberOfResults()->String
+
 }

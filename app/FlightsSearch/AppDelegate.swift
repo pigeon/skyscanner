@@ -15,6 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let attrs = [
+            NSAttributedStringKey.foregroundColor: UIColor.FlightDetails.mainTextColor,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)
+        ]
+        
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        
         return true
     }
 
