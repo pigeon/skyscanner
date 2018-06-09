@@ -54,7 +54,7 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return dateFormatter
     }()
     
-    init(service:FlightSearchService = FlightsSearchServiceMock() /*FlightSearchServiceImpl()*/) {
+    init(service:FlightSearchService = /*FlightsSearchServiceMock()*/ FlightSearchServiceImpl()) {
         flightSearchService = service
     }
     
