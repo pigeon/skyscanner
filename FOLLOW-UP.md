@@ -20,7 +20,11 @@ I'd add more tests for the part where json is getting mapped to the objects that
 
 ### Q) Which parts did you spend the most time with? What did you find most difficult?
 
-I wouldn't say something was particulary difficult it all comes down to the time you can spend for the task. JSON -> PONSO mapping is not difficult but is quite laborious task which I would rather give to some code generator. 
+I wouldn't say something was particulary difficult it all comes down to the time you can spend for the task. JSON -> PONSO
+mapping is not difficult but is quite laborious task which I would rather give to some code generator.
+
+It took me some time and required googling to get details/export things from Sketch. I have been using Zeppelin & Figma for the
+last few years 
 
 
 ### Q) How did you find the test overall? If you have any suggestions on how we can improve the test or our API, we'd love to hear them.

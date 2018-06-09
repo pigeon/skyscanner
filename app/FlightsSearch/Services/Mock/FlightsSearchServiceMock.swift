@@ -10,6 +10,12 @@ import Foundation
 
 
 class FlightsSearchServiceMock : FlightSearchService {
+    func findFlights(from: String, to: String, outboundDate: String, inboundDate: String, completion: @escaping FlightsSearchCompletion) {
+        let jsonDecoder = JSONDecoder()
+        let responseModel = try! jsonDecoder.decode(FlightSearchResults.self, from: jsonData)
+        completion(responseModel, nil)
+    }
+    
     
     let jsonData:Data
     
@@ -17,12 +23,5 @@ class FlightsSearchServiceMock : FlightSearchService {
         let url = Bundle.main.url(forResource: "results", withExtension: "json")!
         jsonData = try! Data(contentsOf: url)
     }
-    
-    func findFlights(from: String, to: String, completion: @escaping FlightsSearchCompletion) {
-        let jsonDecoder = JSONDecoder()
-        let responseModel = try! jsonDecoder.decode(FlightSearchResults.self, from: jsonData)
-        completion(responseModel, nil)
-    }
-    
     
 }

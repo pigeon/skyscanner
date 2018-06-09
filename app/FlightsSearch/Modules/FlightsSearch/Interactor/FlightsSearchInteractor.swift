@@ -48,8 +48,37 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         return dateFormatter
     }()
     
+    lazy var dateFormatterFlayingDate:DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // 2018-06-10
+        return dateFormatter
+    }()
+    
     init(service:FlightSearchService = FlightsSearchServiceMock() /*FlightSearchServiceImpl()*/) {
         flightSearchService = service
+    }
+    
+    func nextMonday(since date:Date) -> Date {
+        let dayNumber = Calendar.current.component(.weekday, from:date)
+        var dayComponent = DateComponents()
+        if dayNumber <= 1 {
+            dayComponent.day = 1
+        } else {
+            dayComponent.day = 9 - dayNumber
+        }
+        guard let monday = Calendar.current.date(byAdding: dayComponent, to: date) else {
+            return Date()
+        }
+        return monday
+    }
+    
+    func nextDay(after date:Date) -> Date {
+        var dayComponent = DateComponents()
+        dayComponent.day = 1
+        guard let nextDay = Calendar.current.date(byAdding: dayComponent, to: date) else {
+            return Date()
+        }
+        return nextDay
     }
     
     func formatFlightTime(_ date:String?) -> String {
@@ -129,7 +158,13 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     func findFlights() {
-        flightSearchService.findFlights(from: "LOND", to: "EDI") { [weak self] object,error in
+        let outboundDate = self.nextMonday(since: Date())
+        let inboundDate = self.nextDay(after: outboundDate)
+        
+        flightSearchService.findFlights(from: "LOND",
+                                        to: "EDI",
+                                        outboundDate:self.dateFormatterFlayingDate.string(from: outboundDate),
+                                        inboundDate: self.dateFormatterFlayingDate.string(from: inboundDate)) { [weak self] object,error in
             if let object = object {
                 let res = self?.populate(with: object)
                 self?.output.flights(res!)

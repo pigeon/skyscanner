@@ -11,7 +11,7 @@ import Foundation
 
 
 protocol FlightSearchService {
-    func findFlights(from:String, to:String, completion:@escaping FlightsSearchCompletion)
+    func findFlights(from:String, to:String,outboundDate:String,inboundDate:String, completion:@escaping FlightsSearchCompletion)
 }
 
 
@@ -28,7 +28,7 @@ class FlightSearchServiceImpl : FlightSearchService {
 
     
     
-    func findFlights(from:String, to:String, completion:@escaping FlightsSearchCompletion) {
+    func findFlights(from:String, to:String,outboundDate:String,inboundDate:String, completion:@escaping FlightsSearchCompletion) {
         
         createSession(from: from, to: to) { [weak self] url,error in
             guard let url = url else {
@@ -87,13 +87,14 @@ class FlightSearchServiceImpl : FlightSearchService {
     }
     
     func pollSearchResult(with url:String,completion:@escaping FlightsSearchCompletion) {
-        let strURL = "\(url)?apikey=\(apiKey)&pageIndex=0&pageSize=3"
+        let strURL = "\(url)?apikey=\(apiKey)&pageIndex=0&pageSize=5"
         let url = URL(string: strURL)
         var request = URLRequest(url: url!)
+        request.addValue("no-cache", forHTTPHeaderField: "cache-control")
         request.httpMethod = "GET"
         let task = session.dataTask(with: request) {  (data, response, error) in
             
-            if let data = data,let response = response as? HTTPURLResponse, response.statusCode == 200 {
+            if let data = data,let response = response as? HTTPURLResponse, response.statusCode == 200  {
                 
                 let jsonDecoder = JSONDecoder()
                 

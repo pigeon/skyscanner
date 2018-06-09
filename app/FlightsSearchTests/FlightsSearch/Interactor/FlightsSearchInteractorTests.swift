@@ -39,6 +39,32 @@ class MoviesListInteractorTests: XCTestCase {
         XCTAssertTrue(interactor.flightDuration(minutes: 217) == "3h 37m", "Flight time conversion is not correct")
     }
     
+    func checkNextMonday(for date:String, expectedDate:String) {
+        let date = interactor.dateFormatterFrom.date(from:date)
+        let nextMonday = interactor.dateFormatterFlayingDate.string(from:interactor.nextMonday(since: date!))
+        XCTAssertTrue( nextMonday == expectedDate, "next monday date is not expected")
+    }
+    
+    func testNextMonday() {
+        checkNextMonday(for: "2018-05-28T06:50:00", expectedDate: "2018-06-04")
+        checkNextMonday(for: "2018-05-20T06:50:00", expectedDate: "2018-05-21")
+        checkNextMonday(for: "2018-05-08T06:50:00", expectedDate: "2018-05-14")
+    }
+
+    func checkNextDay(for date:String, expectedDate:String) {
+        let date = interactor.dateFormatterFrom.date(from:date)
+        let nextDay = interactor.dateFormatterFlayingDate.string(from:interactor.nextDay(after:date!))
+        XCTAssertTrue( nextDay == expectedDate, "next day date is not expected")
+    }
+    
+    func testNextDay() {
+        checkNextDay(for: "2018-05-28T06:50:00", expectedDate: "2018-05-29")
+        checkNextDay(for: "2018-04-08T06:50:00", expectedDate: "2018-04-09")
+        checkNextDay(for: "2018-12-20T06:50:00", expectedDate: "2018-12-21")
+        checkNextDay(for: "2018-09-01T06:50:00", expectedDate: "2018-09-02")
+
+    }
+    
     class MockPresenter: FlightsSearchInteractorOutput {
         func flights(_: [BookingDetails]) {
             
