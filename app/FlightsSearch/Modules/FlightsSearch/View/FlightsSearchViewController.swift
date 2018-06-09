@@ -42,14 +42,13 @@ class FlightsSearchViewController: UIViewController, FlightsSearchViewInput {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarView?.numberOfResults.text = output.numberOfResults()
-        navigationBarView?.title.text = output.title()
-        navigationBarView?.dates.text = output.subTitle()
-        
     }
     
     
     func reload() {
+        self.navigationBarView?.numberOfResults.text = output.numberOfResults()
+        self.navigationBarView?.title.text = output.title()
+        self.navigationBarView?.dates.text = output.subTitle()
         self.collectionView.reloadData()
     }
 

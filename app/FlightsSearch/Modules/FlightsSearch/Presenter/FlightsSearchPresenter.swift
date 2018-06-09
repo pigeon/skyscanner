@@ -37,7 +37,7 @@ class FlightsSearchPresenter: FlightsSearchModuleInput, FlightsSearchViewOutput,
     }
     
     func subTitle() -> String {
-        return ""
+        return "\(interactor.dateFormatterSubtitle.string(from: interactor.outboundFlightDate))-\(interactor.dateFormatterSubtitle.string(from: interactor.inboundFlightDate))"
     }
     
     func numberOfResults() -> String {

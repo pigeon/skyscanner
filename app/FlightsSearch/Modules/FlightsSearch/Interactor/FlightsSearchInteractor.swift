@@ -55,8 +55,22 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
         dateFormatter.dateFormat = "yyyy-MM-dd" // 2018-06-10
         return dateFormatter
     }()
+
+    lazy var dateFormatterSubtitle:DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd., E" // Mar 01., Wed
+        return dateFormatter
+    }()
     
-    init(service:FlightSearchService = FlightsSearchServiceMock() /*FlightSearchServiceImpl()*/) {
+    lazy var inboundFlightDate:Date = {
+        self.nextDay(after: outboundFlightDate)
+    }()
+
+    lazy var outboundFlightDate:Date = {
+        return self.nextMonday(since: Date())
+    }()
+    
+    init(service:FlightSearchService = /*FlightsSearchServiceMock()*/ FlightSearchServiceImpl()) {
         flightSearchService = service
     }
     
@@ -156,13 +170,11 @@ class FlightsSearchInteractor: FlightsSearchInteractorInput {
     }
     
     func findFlights() {
-        let outboundDate = self.nextMonday(since: Date())
-        let inboundDate = self.nextDay(after: outboundDate)
         
         flightSearchService.findFlights(from: "LOND",
                                         to: "EDI",
-                                        outboundDate:self.dateFormatterFlayingDate.string(from: outboundDate),
-                                        inboundDate: self.dateFormatterFlayingDate.string(from: inboundDate)) { [weak self] object,error in
+                                        outboundDate:self.dateFormatterFlayingDate.string(from: self.outboundFlightDate),
+                                        inboundDate: self.dateFormatterFlayingDate.string(from: self.inboundFlightDate)) { [weak self] object,error in
                                             if let object = object {
                                                 let res = self?.populate(with: object)
                                                 self?.output.flights(res!)

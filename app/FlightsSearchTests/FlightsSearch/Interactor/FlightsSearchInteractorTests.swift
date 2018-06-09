@@ -49,6 +49,7 @@ class MoviesListInteractorTests: XCTestCase {
         checkNextMonday(for: "2018-05-28T06:50:00", expectedDate: "2018-06-04")
         checkNextMonday(for: "2018-05-20T06:50:00", expectedDate: "2018-05-21")
         checkNextMonday(for: "2018-05-08T06:50:00", expectedDate: "2018-05-14")
+        checkNextMonday(for: "2018-06-09T22:50:00", expectedDate: "2018-06-11")
     }
 
     func checkNextDay(for date:String, expectedDate:String) {
@@ -61,7 +62,7 @@ class MoviesListInteractorTests: XCTestCase {
         checkNextDay(for: "2018-05-28T06:50:00", expectedDate: "2018-05-29")
         checkNextDay(for: "2018-04-08T06:50:00", expectedDate: "2018-04-09")
         checkNextDay(for: "2018-12-20T06:50:00", expectedDate: "2018-12-21")
-        checkNextDay(for: "2018-09-01T06:50:00", expectedDate: "2018-09-02")
+        checkNextDay(for: "2018-06-11T22:50:00", expectedDate: "2018-06-12")
 
     }
     

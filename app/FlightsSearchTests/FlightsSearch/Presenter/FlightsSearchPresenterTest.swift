@@ -22,6 +22,13 @@ class MoviesPresenterTest: XCTestCase {
     }
 
     class MockInteractor: FlightsSearchInteractorInput {
+        
+        var inboundFlightDate: Date = Date()
+        
+        var outboundFlightDate: Date = Date()
+        
+        var dateFormatterSubtitle: DateFormatter = DateFormatter()
+        
         func findFlights() {
             
         }
