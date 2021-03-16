@@ -52,7 +52,7 @@ The iOS project that you create should be put into the app folder.
 
 You will need to call a real Skyscanner API for this task.
 
-Please use the API key: **ss630745725358065467897349852985** to call the API.
+Please use the API key: **<>** to call the API.
 
 The underlying Skyscanner [API documentation is available here](https://github.com/Skyscanner/api-documentation/tree/master/live_flights_pricing) and a [test harness is provided](http://business.skyscanner.net/portal/en-GB/Documentation/FlightsLivePricingQuickStart) for you to try queries out.
 
